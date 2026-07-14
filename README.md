@@ -78,9 +78,9 @@ coffee-quality/
 │   │   └── index.js           # Configuração de rotas
 │   ├── layout/
 │   │   └── AppLayout.vue      # Layout principal (header/footer)
+│   │   └── style.css          # Estilos globais
 │   ├── App.vue                # Componente raiz
-│   ├── main.js                # Entry point
-│   └── style.css              # Estilos globais
+│   └── main.js                # Entry point
 ├── dist/                      # Build de produção
 ├── index.html                 # HTML base
 ├── vite.config.js             # Configuração do Vite
