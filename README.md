@@ -1,44 +1,136 @@
-# .
+# ☕ Coffee Quality Challenge
 
-This template should help get you started developing with Vue 3 in Vite.
+**Aluno:** Mateus Henrique da Silva  
+**Turma:** 2INFO1  
+**Disciplina:** Desenvolvimento Web II - IFC 2026
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Sistema para avaliação sensorial de cafés especiais, inspirado na metodologia **Specialty Coffee Association (SCA)**.  
+Desenvolvido com **Vue 3 + Vite** como parte da AT - Coffee Quality Challenge.
 
-## Recommended Browser Setup
+## Funcionalidades
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- 📊 **Dashboard** — Indicadores do campeonato (cafés avaliados, melhor nota, última avaliação)
+- 📝 **Avaliações** — Cadastro e listagem de avaliações sensoriais com cálculo automático da média
+- 🏆 **Ranking** — Classificação geral com destaque para o Top 3
+- ☕ **Detalhes do Café** — Visualização completa de cada avaliação
+- ❌ **Página 404** — Tratamento amigável para rotas inexistentes
 
-## Customize configuration
+## Rotas
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+| Rota | Descrição |
+|------|-----------|
+| `/` | Home / Dashboard |
+| `/cafes` | Lista de Cafés Avaliados |
+| `/avaliar` | Formulário de Avaliação |
+| `/ranking` | Ranking Geral |
+| `/cafe/:id` | Detalhes do Café |
 
-## Project Setup
+## Tecnologias
 
-```sh
+- **Vue 3** (Composition API)
+- **Vue Router** (SPA Navigation)
+- **Pinia** (State Management)
+- **Vite** (Build Tool)
+- **Tailwind CSS** (Styling)
+- **JavaScript** (ES6+)
+
+## Como Executar
+
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+Build de produção:
 
-```sh
+```bash
 npm run build
+npm run preview
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Estrutura do Projeto
 
-```sh
-npm run lint
 ```
+coffee-quality/
+├── src/
+│   ├── components/       # Componentes reutilizáveis
+│   │   ├── CoffeeCard.vue
+│   │   ├── RatingForm.vue
+│   │   └── LeaderboardTable.vue
+│   ├── views/            # Páginas da aplicação
+│   │   ├── HomeApp.vue
+│   │   ├── CafesView.vue
+│   │   ├── AvaliarView.vue
+│   │   ├── RankingView.vue
+│   │   ├── CafeDetail.vue
+│   │   └── NotFound.vue
+│   ├── stores/           # Estado global (Pinia)
+│   │   └── coffeeStore.js
+│   ├── router/
+│   │   └── index.js
+│   ├── layout/
+│   │   └── AppLayout.vue
+│   ├── App.vue
+│   ├── main.js
+│   └── style.css
+├── public/
+├── package.json
+└── README.md
+```
+
+## Conceitos Vue.js Utilizados
+
+| Conceito | Onde foi utilizado |
+|----------|-------------------|
+| `v-for` | Listagem de cafés na página Avaliações |
+| `v-if` / `v-else` | Mensagens condicionais (erro, vazio) |
+| `v-bind` | Ligação dinâmica de props e atributos |
+| `v-on` / `@` | Eventos do formulário e botões |
+| `v-model` | Two-way binding no formulário |
+| `Props` | Componentes CoffeeCard, RatingForm, LeaderboardTable |
+| `Computed` | Cálculo da média, getters do ranking |
+| `ref()` / `reactive()` | Reatividade nos componentes |
+| `Vue Router` | Navegação entre páginas, parâmetros de rota |
+| `Pinia` | Gerenciamento global do estado das avaliações |
+
+## Critérios de Avaliação
+
+| Critério | Peso |
+|----------|------|
+| Funcionalidade | 40% |
+| Conceitos Vue.js | 30% |
+| Organização do Projeto | 15% |
+| Interface e Experiência | 10% |
+| README e Documentação | 5% |
+
+## Prints das Telas
+
+*(Adicionar prints após desenvolver)*
+
+- [ ] Home Dashboard
+- [ ] Página Avaliações
+- [ ] Página Ranking
+- [ ] Detalhes do Café
+
+---
+
+## 📦 Backlog do Projeto
+
+O backlog completo está disponível no [GitHub Projects](https://github.com/Mateus2411/coffee-quality/issues) como Issues organizadas por Epics:
+
+| Epic | Issues | Status |
+|------|--------|--------|
+| Estrutura Inicial | #1, #2 | ⬜ |
+| Layout | #3 | ⬜ |
+| Componentes | #4, #5, #6 | ⬜ |
+| Home (Dashboard) | #7 | ⬜ |
+| Avaliações | #8 | ⬜ |
+| Ranking | #9 | ⬜ |
+| Detalhes do Café | #10 | ⬜ |
+| Página 404 | #11 | ⬜ |
+| Pinia Store | #12 | ⬜ |
+| Deploy e Docs | #13 | ⬜ |
+
+> ☕ **Squad Colmeia** — Coffee Quality Challenge 2026
