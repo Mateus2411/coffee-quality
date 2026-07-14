@@ -1,136 +1,206 @@
 # ☕ Coffee Quality Challenge
 
-**Aluno:** Mateus Henrique da Silva  
-**Turma:** 2INFO1  
-**Disciplina:** Desenvolvimento Web II - IFC 2026
+<p align="center">
+  <img src="./public/coffee_icon.png" alt="Coffee Quality" width="120"/>
+</p>
+
+<p align="center">
+  <strong>AT — Desenvolvimento Web II</strong><br>
+  Instituto Federal Catarinense (IFC) — 2026
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Vue_3-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue 3"/>
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"/>
+  <img src="https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=black" alt="Pinia"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"/>
+  <img src="https://img.shields.io/badge/SCA_Metodologia-8B4513?style=for-the-badge" alt="SCA"/>
+</p>
 
 ---
 
-Sistema para avaliação sensorial de cafés especiais, inspirado na metodologia **Specialty Coffee Association (SCA)**.  
-Desenvolvido com **Vue 3 + Vite** como parte da AT - Coffee Quality Challenge.
+## 📋 Sobre o Projeto
 
-## Funcionalidades
+Sistema web para **avaliação sensorial de cafés especiais**, seguindo a metodologia da **Specialty Coffee Association (SCA)**. O objetivo é registrar e classificar diferentes amostras de café com base em critérios sensoriais, gerando um ranking automatizado.
 
-- 📊 **Dashboard** — Indicadores do campeonato (cafés avaliados, melhor nota, última avaliação)
-- 📝 **Avaliações** — Cadastro e listagem de avaliações sensoriais com cálculo automático da média
-- 🏆 **Ranking** — Classificação geral com destaque para o Top 3
-- ☕ **Detalhes do Café** — Visualização completa de cada avaliação
-- ❌ **Página 404** — Tratamento amigável para rotas inexistentes
+> *"Transforme a arte da degustação em dados — avalie, compare e descubra os melhores cafés."*
 
-## Rotas
+---
 
-| Rota | Descrição |
-|------|-----------|
-| `/` | Home / Dashboard |
-| `/cafes` | Lista de Cafés Avaliados |
-| `/avaliar` | Formulário de Avaliação |
-| `/ranking` | Ranking Geral |
-| `/cafe/:id` | Detalhes do Café |
+## 🧭 Rotas da Aplicação
 
-## Tecnologias
+| Rota | Página | Descrição |
+|:-----|:-------|:----------|
+| `/` | **Dashboard** | Indicadores do campeonato (total de cafés, melhor nota, última avaliação) |
+| `/cafes` | **Avaliações** | Listagem de todos os cafés avaliados |
+| `/avaliar` | **Nova Avaliação** | Formulário sensorial com cálculo automático da média |
+| `/ranking` | **Ranking** | Classificação geral com destaque para o Top 3 |
+| `/cafe/:id` | **Detalhes** | Ficha completa da avaliação de um café |
+| `/*` | **404** | Página amigável para rotas inexistentes |
 
-- **Vue 3** (Composition API)
-- **Vue Router** (SPA Navigation)
-- **Pinia** (State Management)
-- **Vite** (Build Tool)
-- **Tailwind CSS** (Styling)
-- **JavaScript** (ES6+)
+---
 
-## Como Executar
+## 🛠️ Tecnologias
 
-```bash
-npm install
-npm run dev
-```
+| Tecnologia | Versão | Função |
+|:-----------|:-------|:-------|
+| **Vue 3** | ^3.5 | Framework progressivo (Composition API) |
+| **Vite** | ^8.0 | Build tool e dev server |
+| **Vue Router** | ^5.1 | Roteamento SPA |
+| **Pinia** | ^3.0 | Gerenciamento de estado global |
+| **Tailwind CSS** | ^4.3 | Estilização utilitária |
+| **ESLint + Oxlint** | — | Linting e qualidade de código |
+| **Prettier** | — | Formatação consistente |
 
-Build de produção:
+---
 
-```bash
-npm run build
-npm run preview
-```
-
-## Estrutura do Projeto
+## 📦 Estrutura do Projeto
 
 ```
 coffee-quality/
-├── src/
-│   ├── components/       # Componentes reutilizáveis
-│   │   ├── CoffeeCard.vue
-│   │   ├── RatingForm.vue
-│   │   └── LeaderboardTable.vue
-│   ├── views/            # Páginas da aplicação
-│   │   ├── HomeApp.vue
-│   │   ├── CafesView.vue
-│   │   ├── AvaliarView.vue
-│   │   ├── RankingView.vue
-│   │   ├── CafeDetail.vue
-│   │   └── NotFound.vue
-│   ├── stores/           # Estado global (Pinia)
-│   │   └── coffeeStore.js
-│   ├── router/
-│   │   └── index.js
-│   ├── layout/
-│   │   └── AppLayout.vue
-│   ├── App.vue
-│   ├── main.js
-│   └── style.css
 ├── public/
-├── package.json
-└── README.md
+│   └── coffee_icon.png        # Ícone da aplicação
+├── src/
+│   ├── components/            # Componentes reutilizáveis
+│   │   ├── CoffeeCard.vue     # Card individual de café
+│   │   ├── RatingForm.vue     # Formulário de avaliação sensorial
+│   │   └── LeaderboardTable.vue  # Tabela de classificação
+│   ├── views/                 # Páginas da aplicação
+│   │   ├── HomeApp.vue        # Dashboard inicial
+│   │   ├── CafesView.vue      # Lista de cafés avaliados
+│   │   ├── AvaliarView.vue    # Formulário de avaliação
+│   │   ├── RankingView.vue    # Ranking geral
+│   │   ├── CafeDetail.vue     # Detalhes do café
+│   │   └── NotFound.vue       # Página 404
+│   ├── stores/                # Estado global (Pinia)
+│   │   └── coffeeStore.js     # Store de avaliações
+│   ├── router/
+│   │   └── index.js           # Configuração de rotas
+│   ├── layout/
+│   │   └── AppLayout.vue      # Layout principal (header/footer)
+│   ├── App.vue                # Componente raiz
+│   ├── main.js                # Entry point
+│   └── style.css              # Estilos globais
+├── dist/                      # Build de produção
+├── index.html                 # HTML base
+├── vite.config.js             # Configuração do Vite
+├── package.json               # Dependências
+├── eslint.config.js           # Config do ESLint
+├── .prettierrc.json           # Config do Prettier
+├── .editorconfig              # Config do editor
+└── README.md                  # Documentação
 ```
-
-## Conceitos Vue.js Utilizados
-
-| Conceito | Onde foi utilizado |
-|----------|-------------------|
-| `v-for` | Listagem de cafés na página Avaliações |
-| `v-if` / `v-else` | Mensagens condicionais (erro, vazio) |
-| `v-bind` | Ligação dinâmica de props e atributos |
-| `v-on` / `@` | Eventos do formulário e botões |
-| `v-model` | Two-way binding no formulário |
-| `Props` | Componentes CoffeeCard, RatingForm, LeaderboardTable |
-| `Computed` | Cálculo da média, getters do ranking |
-| `ref()` / `reactive()` | Reatividade nos componentes |
-| `Vue Router` | Navegação entre páginas, parâmetros de rota |
-| `Pinia` | Gerenciamento global do estado das avaliações |
-
-## Critérios de Avaliação
-
-| Critério | Peso |
-|----------|------|
-| Funcionalidade | 40% |
-| Conceitos Vue.js | 30% |
-| Organização do Projeto | 15% |
-| Interface e Experiência | 10% |
-| README e Documentação | 5% |
-
-## Prints das Telas
-
-*(Adicionar prints após desenvolver)*
-
-- [ ] Home Dashboard
-- [ ] Página Avaliações
-- [ ] Página Ranking
-- [ ] Detalhes do Café
 
 ---
 
-## 📦 Backlog do Projeto
+## 🚀 Como Executar
 
-O backlog completo está disponível no [GitHub Projects](https://github.com/Mateus2411/coffee-quality/issues) como Issues organizadas por Epics:
+```bash
+# 1. Instalar dependências
+npm install
 
-| Epic | Issues | Status |
-|------|--------|--------|
-| Estrutura Inicial | #1, #2 | ⬜ |
-| Layout | #3 | ⬜ |
-| Componentes | #4, #5, #6 | ⬜ |
-| Home (Dashboard) | #7 | ⬜ |
-| Avaliações | #8 | ⬜ |
-| Ranking | #9 | ⬜ |
-| Detalhes do Café | #10 | ⬜ |
-| Página 404 | #11 | ⬜ |
-| Pinia Store | #12 | ⬜ |
-| Deploy e Docs | #13 | ⬜ |
+# 2. Iniciar servidor de desenvolvimento
+npm run dev
 
-> ☕ **Squad Colmeia** — Coffee Quality Challenge 2026
+# 3. Build de produção
+npm run build
+
+# 4. Preview do build
+npm run preview
+```
+
+### Comandos auxiliares
+
+```bash
+npm run lint        # Executa oxlint + eslint
+npm run format      # Formata código com Prettier
+```
+
+---
+
+## 📊 Funcionalidades por Página
+
+### 🏠 Dashboard (`/`)
+- Cards com indicadores: total de cafés avaliados, melhor nota, última avaliação
+- Botões de atalho para nova avaliação e ranking
+- Layout responsivo
+
+### 📝 Avaliações (`/cafes` + `/avaliar`)
+- Listagem de todas as avaliações registradas
+- Formulário com critérios sensoriais SCA
+- Cálculo automático da média ponderada
+
+### 🏆 Ranking (`/ranking`)
+- Tabela ordenada por nota final (decrescente)
+- Top 3 destacado visualmente
+- Link para detalhes de cada café
+
+### ☕ Detalhes do Café (`/cafe/:id`)
+- Ficha completa da avaliação
+- Notas por critério sensorial
+- Média final e classificação
+
+---
+
+## 📐 Conceitos Vue.js Abordados
+
+| Conceito | Onde é utilizado |
+|:---------|:-----------------|
+| `v-for` | Listagem de cafés nas páginas de avaliações |
+| `v-if` / `v-else` | Mensagens condicionais (carregando, vazio, erro) |
+| `v-bind` | Ligação dinâmica de props e atributos |
+| `v-on` / `@` | Eventos do formulário e interações |
+| `v-model` | Two-way binding nos inputs do formulário |
+| **Props** | Componentes CoffeeCard, RatingForm, LeaderboardTable |
+| **Computed** | Cálculo da média, getters do ranking |
+| **ref() / reactive()** | Reatividade local nos componentes |
+| **Vue Router** | Navegação SPA, parâmetros de rota (`/cafe/:id`) |
+| **Pinia** | Estado global das avaliações |
+
+---
+
+## 📈 Critérios de Avaliação
+
+| Critério | Peso | Descrição |
+|:---------|:----:|:----------|
+| ⚙️ Funcionalidade | 40% | A aplicação funciona conforme o esperado |
+| 🧩 Conceitos Vue.js | 30% | Uso correto dos recursos do framework |
+| 📁 Organização | 15% | Estrutura de arquivos e componentes |
+| 🎨 Interface | 10% | Experiência visual e usabilidade |
+| 📖 Documentação | 5% | README e comentários no código |
+
+---
+
+## 🧪 Metodologia SCA
+
+A avaliação segue os critérios da **Specialty Coffee Association**:
+
+- **Fragrância / Aroma**
+- **Sabor**
+- **Finalização**
+- **Acidez**
+- **Corpo**
+- **Uniformidade**
+- **Balanço**
+- **Xícara Limpa**
+- **Doçura**
+- **Nota do Avaliador**
+
+Cada critério recebe uma nota de **0 a 10**, e a **média final** determina a classificação:
+
+| Pontuação | Classificação |
+|:---------:|:--------------|
+| ≥ 90 | **Excelente** — Speciality Coffee Premium |
+| 85 – 89,9 | **Muito Bom** — Speciality Coffee |
+| 80 – 84,9 | **Bom** — Speciality Coffee |
+| < 80 | **Standard** — Café Comum |
+
+---
+
+## 🧑‍🎓 Aluno
+
+**Mateus Henrique da Silva** · 2INFO1 · IFC 2026
+
+---
+
+> ☕ *"A vida é muito curta para café ruim."*
