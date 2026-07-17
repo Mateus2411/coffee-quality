@@ -1,20 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeApp from '@/views/HomeApp.vue'
-
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
+const routes = [
+  {
     path: '/',
     name: 'home',
-    component: () => HomeApp,
-    meta: {
-    // hideHeader: true,
-    // hideFooter: true,
-    // requiresAuth: true,
-    },
-    },
-  ],
+    component: () => import('@/views/HomeApp.vue'),
+  },
+  {
+    path: '/avaliacoes',
+    name: 'avaliacoes',
+    component: () => import('@/views/AvaliacoesApp.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound.vue'),
+  },
+]
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
 })
 
 export default router
