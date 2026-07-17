@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import AvaliacoesApp from '@/views/AvaliacoesApp.vue'
 import HomeApp from '@/views/HomeApp.vue'
-import NotFound from '@/views/404.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const routes = [
   {

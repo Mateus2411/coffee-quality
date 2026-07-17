@@ -115,7 +115,7 @@ const ultima = {
           <span>Ver Avaliações</span>
         </router-link>
       </div>
-
+      <!-- Footer deve ser movido para o final da página  e componentizado-->
       <div
         class="mt-8 bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 flex flex-col lg:flex-row justify-between items-center gap-6"
       >
