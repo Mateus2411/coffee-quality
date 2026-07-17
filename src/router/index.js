@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/avaliacoes',
     name: 'avaliacoes',
-    component: () => import('@/views/Avaliacoes.vue'),
+    component: () => import('@/views/AvaliacoesApp.vue'),
   },
   {
     path: '/:pathMatch(.*)*',
