@@ -1,19 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+import AvaliacoesApp from '@/views/AvaliacoesApp.vue'
+import HomeApp from '@/views/HomeApp.vue'
+import NotFound from '@/views/404.vue'
+
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeApp.vue'),
+    component: HomeApp,
   },
   {
     path: '/avaliacoes',
     name: 'avaliacoes',
-    component: () => import('@/views/AvaliacoesApp.vue'),
+    component: AvaliacoesApp,
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/views/NotFound.vue'),
+    component: NotFound,
   },
 ]
 const router = createRouter({
