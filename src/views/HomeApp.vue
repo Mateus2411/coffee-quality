@@ -113,13 +113,14 @@ const ultima = {
 
       <!-- Botão -->
 
-      <button
+      <router-link
+        to="/avaliacoes"
         class="mx-auto mt-8 flex items-center gap-3 bg-[#6F4323] hover:bg-[#5B3419] transition text-white font-semibold px-10 py-4 rounded-xl shadow-sm"
       >
         <img src="/checklist.svg" alt="Checklist" class="w-6 h-6" />
 
         <span>Ver Avaliações</span>
-      </button>
+      </router-link>
 
       <!-- Banner -->
 
