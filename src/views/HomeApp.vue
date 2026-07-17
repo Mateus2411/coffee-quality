@@ -64,8 +64,6 @@ const ultima = {
       <!-- Cards -->
 
       <div class="grid lg:grid-cols-3 gap-6 mt-6">
-        <!-- Total -->
-
         <div class="bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 text-center">
           <div class="w-24 h-24 mx-auto rounded-full bg-[#FBF2E7] flex items-center justify-center">
             <img src="/users.png" class="w-11" />
@@ -77,8 +75,6 @@ const ultima = {
 
           <span class="text-gray-500"> cafés </span>
         </div>
-
-        <!-- Melhor Café -->
 
         <div class="bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 text-center">
           <div class="w-24 h-24 mx-auto rounded-full bg-[#EEF4E6] flex items-center justify-center">
@@ -93,8 +89,6 @@ const ultima = {
 
           <span class="text-gray-500"> {{ melhor.cafe.produtor }} </span>
         </div>
-
-        <!-- Última Avaliação -->
 
         <div class="bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 text-center">
           <div class="w-24 h-24 mx-auto rounded-full bg-[#EAF1FB] flex items-center justify-center">
@@ -111,18 +105,16 @@ const ultima = {
         </div>
       </div>
 
-      <!-- Botão -->
+      <div class="mt-8 flex justify-center">
+        <router-link
+          to="/avaliacoes"
+          class="inline-flex items-center gap-3 rounded-xl bg-[#6F4323] px-10 py-4 font-semibold text-white shadow-sm transition hover:bg-[#5B3419]"
+        >
+          <img src="/checklist.svg" alt="Checklist" class="h-6 w-6" />
 
-      <router-link
-        to="/avaliacoes"
-        class="mx-auto mt-8 flex items-center gap-3 bg-[#6F4323] hover:bg-[#5B3419] transition text-white font-semibold px-10 py-4 rounded-xl shadow-sm"
-      >
-        <img src="/checklist.svg" alt="Checklist" class="w-6 h-6" />
-
-        <span>Ver Avaliações</span>
-      </router-link>
-
-      <!-- Banner -->
+          <span>Ver Avaliações</span>
+        </router-link>
+      </div>
 
       <div
         class="mt-8 bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 flex flex-col lg:flex-row justify-between items-center gap-6"
