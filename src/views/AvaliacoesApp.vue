@@ -12,22 +12,17 @@ import { toast } from 'vue-sonner'
 
 const router = useRouter()
 
-// Observa altura do form para dimensionar a coluna da lista
-const formRef = ref(null)
-const formHeight = ref(0)
-
+const formCardRef = ref(null)
+const formHeight = ref(null)
 let resizeObserver = null
 
-function updateFormHeight() {
-  if (formRef.value) {
-    formHeight.value = formRef.value.scrollHeight
-  }
-}
-
 onMounted(() => {
-  updateFormHeight()
-  resizeObserver = new ResizeObserver(updateFormHeight)
-  if (formRef.value) resizeObserver.observe(formRef.value)
+  if (formCardRef.value && 'ResizeObserver' in window) {
+    resizeObserver = new ResizeObserver(([entry]) => {
+      formHeight.value = entry.contentRect.height
+    })
+    resizeObserver.observe(formCardRef.value)
+  }
 })
 
 onUnmounted(() => {
@@ -105,17 +100,17 @@ function getClassificacaoCor(cls) {
           </div>
 
           <!-- Listagem de avaliações -->
-          <div class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5">
-            <h2 class="text-sm font-bold text-stone-700 mb-4 m-0">
+          <div
+            class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5 flex flex-col min-h-0"
+            :style="formHeight ? { maxHeight: formHeight + 49.6 + 'px' } : null"
+          >
+            <h2 class="text-sm font-bold text-stone-700 mb-4 m-0 shrink-0">
               Histórico de Avaliações ({{ avaliacoesOrdenadas.length }})
             </h2>
             <div v-if="avaliacoesOrdenadas.length === 0" class="text-center py-8 text-stone-400 text-sm">
               Nenhuma avaliação registrada ainda.
             </div>
-            <div
-              class="flex flex-col gap-3 overflow-y-auto pr-1"
-              :style="{ maxHeight: formHeight > 0 ? formHeight + 'px' : 'auto' }"
-            >
+            <div class="flex flex-col gap-3 overflow-y-auto pr-1 min-h-0">
               <div
                 v-for="av in avaliacoesOrdenadas"
                 :key="av.id"
@@ -145,7 +140,10 @@ function getClassificacaoCor(cls) {
         </div>
 
         <!-- Right: form -->
-        <div ref="formRef" class="lg:col-span-3 order-1 lg:order-2">
+        <div
+          ref="formCardRef"
+          class="lg:col-span-3 order-1 lg:order-2"
+        >
           <RatingForm :cafes="cafesLista" @salvar="handleSalvar" />
         </div>
       </div>
