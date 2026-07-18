@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import FooterInfo from '@/components/FooterInfo.vue'
 import RatingForm from '@/components/RatingForm.vue'
 import LeaderboardTable from '@/components/LeaderboardTable.vue'
@@ -11,6 +11,28 @@ import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
 
 const router = useRouter()
+
+// Observa altura do form para dimensionar a coluna da lista
+const formRef = ref(null)
+const formHeight = ref(0)
+
+let resizeObserver = null
+
+function updateFormHeight() {
+  if (formRef.value) {
+    formHeight.value = formRef.value.scrollHeight
+  }
+}
+
+onMounted(() => {
+  updateFormHeight()
+  resizeObserver = new ResizeObserver(updateFormHeight)
+  if (formRef.value) resizeObserver.observe(formRef.value)
+})
+
+onUnmounted(() => {
+  if (resizeObserver) resizeObserver.disconnect()
+})
 
 // Trigger counter to force re-render after new evaluation
 const updateTrigger = ref(0)
@@ -90,7 +112,10 @@ function getClassificacaoCor(cls) {
             <div v-if="avaliacoesOrdenadas.length === 0" class="text-center py-8 text-stone-400 text-sm">
               Nenhuma avaliação registrada ainda.
             </div>
-            <div class="flex flex-col gap-3 overflow-y-auto max-h-96 pr-1">
+            <div
+              class="flex flex-col gap-3 overflow-y-auto pr-1"
+              :style="{ maxHeight: formHeight > 0 ? formHeight + 'px' : 'auto' }"
+            >
               <div
                 v-for="av in avaliacoesOrdenadas"
                 :key="av.id"
@@ -120,7 +145,7 @@ function getClassificacaoCor(cls) {
         </div>
 
         <!-- Right: form -->
-        <div class="lg:col-span-3 order-1 lg:order-2">
+        <div ref="formRef" class="lg:col-span-3 order-1 lg:order-2">
           <RatingForm :cafes="cafesLista" @salvar="handleSalvar" />
         </div>
       </div>
