@@ -12,6 +12,7 @@ import { toast } from 'vue-sonner'
 
 const router = useRouter()
 
+// ResizeObserver p/ medir altura do form e dar mesmo tamanho pra lista
 const formCardRef = ref(null)
 const formHeight = ref(null)
 let resizeObserver = null
@@ -33,7 +34,7 @@ onUnmounted(() => {
 const updateTrigger = ref(0)
 
 const cafesLista = computed(() => {
-  updateTrigger.value // dependência para re-calcular
+  updateTrigger.value
   return rankingCoffees()
 })
 
@@ -99,7 +100,7 @@ function getClassificacaoCor(cls) {
             <LeaderboardTable :coffees="cafesLista" @ver-detalhes="handleDetalhes" />
           </div>
 
-          <!-- Listagem de avaliações -->
+          <!-- Listagem de avaliações com altura dinâmica = altura do form -->
           <div
             class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5 flex flex-col min-h-0"
             :style="formHeight ? { maxHeight: formHeight + 'px' } : null"
@@ -139,7 +140,7 @@ function getClassificacaoCor(cls) {
           </div>
         </div>
 
-        <!-- Right: form -->
+        <!-- Right: form (medido pelo ResizeObserver) -->
         <div
           ref="formCardRef"
           class="lg:col-span-3 order-1 lg:order-2"
