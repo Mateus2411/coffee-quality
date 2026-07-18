@@ -102,7 +102,7 @@ function getClassificacaoCor(cls) {
           <!-- Listagem de avaliações -->
           <div
             class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5 flex flex-col min-h-0"
-            :style="formHeight ? { maxHeight: formHeight + 49.6 + 'px' } : null"
+            :style="formHeight ? { maxHeight: formHeight + 'px' } : null"
           >
             <h2 class="text-sm font-bold text-stone-700 mb-4 m-0 shrink-0">
               Histórico de Avaliações ({{ avaliacoesOrdenadas.length }})
