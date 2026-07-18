@@ -1,16 +1,10 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import FooterInfo from '@/components/FooterInfo.vue'
 import RatingForm from '@/components/RatingForm.vue'
-import LeaderboardTable from '@/components/LeaderboardTable.vue'
-import { avaliacoes as rawAvaliacoes } from '@/stores/avaliacoes.js'
 import { coffees } from '@/stores/coffees.js'
 import { addAvaliacao } from '@/utils/addAvaliacao.js'
-import { rankingCoffees } from '@/utils/rankingCoffees'
-import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-
-const router = useRouter()
 
 // ResizeObserver p/ medir altura do form e dar mesmo tamanho pra lista
 const formCardRef = ref(null)
@@ -32,17 +26,6 @@ onUnmounted(() => {
 
 // Trigger counter to force re-render after new evaluation
 const updateTrigger = ref(0)
-
-const cafesLista = computed(() => {
-  updateTrigger.value
-  return rankingCoffees()
-})
-
-const avaliacoesOrdenadas = computed(() => {
-  updateTrigger.value
-  return [...rawAvaliacoes].sort((a, b) => new Date(b.data) - new Date(a.data))
-})
-
 function handleSalvar({ cafeId, notas, pontuacaoTotal, comentario }) {
   addAvaliacao(cafeId, notas, comentario)
   updateTrigger.value++
@@ -51,11 +34,6 @@ function handleSalvar({ cafeId, notas, pontuacaoTotal, comentario }) {
     description: `Nota total: ${pontuacaoTotal.toFixed(1)} pts`,
   })
 }
-
-function handleDetalhes(id) {
-  router.push(`/ranking/${id}`)
-}
-
 function getCafeNome(cafeId) {
   return coffees.find((c) => c.id === cafeId)?.nome ?? '—'
 }
@@ -92,15 +70,6 @@ function getClassificacaoCor(cls) {
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
         <!-- Left: listagem + ranking -->
         <div class="lg:col-span-2 flex flex-col gap-4 order-2 lg:order-1">
-          <!-- Ranking parcial -->
-          <div class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5">
-            <h2 class="text-sm font-bold text-stone-700 mb-4 m-0">
-              Ranking Parcial ({{ cafesLista.length }})
-            </h2>
-            <LeaderboardTable :coffees="cafesLista" @ver-detalhes="handleDetalhes" />
-          </div>
-
-          <!-- Listagem de avaliações com altura dinâmica = altura do form -->
           <div
             class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5 flex flex-col min-h-0"
             :style="formHeight ? { maxHeight: formHeight + 'px' } : null"
