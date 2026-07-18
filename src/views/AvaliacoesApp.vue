@@ -4,6 +4,7 @@ import FooterInfo from '@/components/FooterInfo.vue'
 import RatingForm from '@/components/RatingForm.vue'
 import LeaderboardTable from '@/components/LeaderboardTable.vue'
 import { avaliacoes } from '@/stores/avaliacoes.js'
+import { coffees } from '@/stores/coffees.js'
 import { addAvaliacao } from '@/utils/addAvaliacao.js'
 import { rankingCoffees } from '@/utils/rankingCoffees'
 import { useRouter } from 'vue-router'
@@ -13,7 +14,7 @@ const router = useRouter()
 const cafesLista = rankingCoffees()
 
 function handleSalvar({ cafeId, notas, pontuacaoTotal, comentario }) {
-  const nova = addAvaliacao(cafeId, notas, comentario)
+  addAvaliacao(cafeId, notas, comentario)
 
   toast.success('Avaliação salva com sucesso!', {
     description: `Nota total: ${pontuacaoTotal.toFixed(1)} pts`,
@@ -23,6 +24,20 @@ function handleSalvar({ cafeId, notas, pontuacaoTotal, comentario }) {
 function handleDetalhes(id) {
   router.push(`/ranking/${id}`)
 }
+
+function getCafeNome(cafeId) {
+  return coffees.find((c) => c.id === cafeId)?.nome ?? '—'
+}
+
+function getClassificacaoCor(cls) {
+  if (cls === 'Excelente') return 'bg-emerald-100 text-emerald-800'
+  if (cls === 'Muito Bom') return 'bg-amber-100 text-amber-800'
+  if (cls === 'Bom') return 'bg-blue-100 text-blue-800'
+  return 'bg-stone-100 text-stone-600'
+}
+
+// Ordena avaliações da mais recente pra mais antiga
+const avaliacoesOrdenadas = [...avaliacoes].sort((a, b) => new Date(b.data) - new Date(a.data))
 </script>
 
 <template>
@@ -41,14 +56,15 @@ function handleDetalhes(id) {
         <div>
           <h1 class="text-3xl font-black text-stone-900 leading-tight m-0">Avaliações de Cafés</h1>
           <p class="text-stone-500 text-sm mt-1 m-0">
-            Avalie os cafés usando a metodologia SCA e veja o ranking parcial.
+            Avalie os cafés usando a metodologia SCA e confira o histórico.
           </p>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
-        <!-- Left: ranking parcial -->
+        <!-- Left: listagem + ranking -->
         <div class="lg:col-span-2 flex flex-col gap-4 order-2 lg:order-1">
+          <!-- Ranking parcial -->
           <div class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5">
             <h2 class="text-sm font-bold text-stone-700 mb-4 m-0">
               Ranking Parcial ({{ cafesLista.length }})
@@ -56,31 +72,40 @@ function handleDetalhes(id) {
             <LeaderboardTable :coffees="cafesLista" @ver-detalhes="handleDetalhes" />
           </div>
 
-          <div
-            v-if="cafesLista.length === 0"
-            class="bg-white border border-dashed border-stone-300 rounded-2xl px-6 py-10 flex flex-col items-center text-center gap-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-7 h-7 text-stone-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 8h13v5a5 5 0 01-5 5H8a5 5 0 01-5-5V8z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M16 9h1.5a2.5 2.5 0 010 5H16"
-              />
-            </svg>
-            <p class="text-sm text-stone-500 m-0">Nenhum café avaliado ainda.</p>
-            <p class="text-sm text-stone-400 m-0">Adicione sua primeira avaliação ao lado.</p>
+          <!-- Listagem de avaliações -->
+          <div class="bg-white border border-stone-200 rounded-2xl shadow-sm p-5">
+            <h2 class="text-sm font-bold text-stone-700 mb-4 m-0">
+              Histórico de Avaliações ({{ avaliacoesOrdenadas.length }})
+            </h2>
+            <div v-if="avaliacoesOrdenadas.length === 0" class="text-center py-8 text-stone-400 text-sm">
+              Nenhuma avaliação registrada ainda.
+            </div>
+            <div class="flex flex-col gap-3 overflow-y-auto max-h-96 pr-1">
+              <div
+                v-for="av in avaliacoesOrdenadas"
+                :key="av.id"
+                class="bg-stone-50/70 border border-stone-100 rounded-xl px-4 py-3"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-sm font-bold text-stone-900">
+                    {{ getCafeNome(av.cafeId) }}
+                  </span>
+                  <span
+                    class="text-[11px] font-bold px-2 py-0.5 rounded-full"
+                    :class="getClassificacaoCor(av.classificacao)"
+                  >
+                    {{ av.classificacao }}
+                  </span>
+                </div>
+                <div class="flex items-center justify-between text-xs text-stone-400">
+                  <span>Nota: <strong class="text-emerald-700">{{ av.pontuacaoTotal }}</strong></span>
+                  <span>{{ av.data }} · Avaliador #{{ av.userId }}</span>
+                </div>
+                <p v-if="av.comentario" class="text-xs text-stone-500 italic mt-1.5 m-0 leading-relaxed">
+                  "{{ av.comentario }}"
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -93,7 +118,8 @@ function handleDetalhes(id) {
       <!-- Footer info -->
       <FooterInfo title="Metodologia SCA">
         <p class="text-sm text-stone-500 my-0.5 leading-relaxed">
-          A Specialty Coffee Association define 10 critérios de avaliação sensorial, cada um de 0 a 10. A soma define a classificação final do café.
+          A Specialty Coffee Association define 10 critérios de avaliação sensorial, cada um de 0 a 10.
+          A soma total (máx. 100) define a classificação final do café.
         </p>
       </FooterInfo>
     </div>
