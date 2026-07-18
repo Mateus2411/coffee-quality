@@ -11,7 +11,7 @@ const emit = defineEmits(['update:modelValue'])
 const dropdownOpen = ref(false)
 const dropdownRef = ref(null)
 
-const cafeSelecionado = computed(() => props.cafes.find((c) => c.id === props.modelValue) || null)
+const cafeSelecionado = computed(() => props.cafes?.find((c) => c.id === props.modelValue) || null)
 
 function toggleDropdown() {
   dropdownOpen.value = !dropdownOpen.value
@@ -142,7 +142,10 @@ onUnmounted(() => {
             </svg>
           </button>
 
-          <p v-if="props.cafes.length === 0" class="px-3.5 py-3 text-sm text-stone-400 text-center">
+          <p
+            v-if="!props.cafes || props.cafes.length === 0"
+            class="px-3.5 py-3 text-sm text-stone-400 text-center"
+          >
             Nenhum café disponível.
           </p>
         </div>
