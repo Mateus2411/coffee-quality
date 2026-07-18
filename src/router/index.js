@@ -2,23 +2,40 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import AvaliacoesApp from '@/views/AvaliacoesApp.vue'
 import HomeApp from '@/views/HomeApp.vue'
-import NotFound from '@/views/404.vue'
+import NotFound from '@/views/NotFound.vue'
+import RankingPageApp from '@/views/RankingPageApp.vue'
+import DetalhesBase from '@/views/DetalhesBase.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeApp,
+    meta: { showNavBar: true },
   },
   {
     path: '/avaliacoes',
     name: 'avaliacoes',
     component: AvaliacoesApp,
+    meta: { showNavBar: true },
+  },
+  {
+    path: '/ranking',
+    name: 'rankingPage',
+    component: RankingPageApp,
+    meta: { showNavBar: true },
+  },
+  {
+    path: '/ranking/:id',
+    name: 'detalhes',
+    component: DetalhesBase,
+    meta: { showNavBar: true },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound,
+    meta: { showNavBar: false },
   },
 ]
 const router = createRouter({
