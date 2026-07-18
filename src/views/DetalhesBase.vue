@@ -42,7 +42,7 @@ function notaMedia(cafeId, criterio) {
       <div class="flex items-center gap-4 mb-8">
         <button
           class="flex items-center gap-1 text-sm font-semibold text-stone-500 hover:text-stone-800 transition-colors"
-          @click="router.push('/ranking')"
+          @click="router.back()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

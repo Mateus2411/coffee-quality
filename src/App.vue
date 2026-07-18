@@ -1,7 +1,13 @@
 <script setup>
+import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
 import { Toaster } from 'vue-sonner'
+import { setAvaliacoes } from '@/utils/setAvalicoes.js'
+
+onMounted(() => {
+  setAvaliacoes()
+})
 
 const route = useRoute()
 </script>
