@@ -53,7 +53,7 @@ const ultima = {
             </p>
 
             <router-link
-              to="/coffees"
+              to="/catalogo"
               class="mt-8 inline-block rounded-xl bg-[#8B5A2B] px-8 py-4 text-lg font-medium text-white transition hover:bg-[#73481f]"
             >
               Ver Cafés

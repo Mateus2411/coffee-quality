@@ -5,6 +5,7 @@ import HomeApp from '@/views/HomeApp.vue'
 import NotFound from '@/views/NotFound.vue'
 import RankingPageApp from '@/views/RankingPageApp.vue'
 import DetalhesBase from '@/views/DetalhesBase.vue'
+import CatalogoCoffees from '@/views/CatalogoCoffees.vue'
 
 const routes = [
   {
@@ -30,6 +31,14 @@ const routes = [
     name: 'detalhes',
     component: DetalhesBase,
     meta: { showNavBar: true },
+  },
+  {
+  path: '/catalogo',
+  name: 'catalogo',
+  component: CatalogoCoffees,
+  meta: {
+    showNavBar: true,
+  },
   },
   {
     path: '/:pathMatch(.*)*',
