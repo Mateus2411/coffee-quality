@@ -5,7 +5,8 @@ import RatingForm from '@/components/RatingForm.vue'
 import { coffees } from '@/stores/coffees.js'
 import { addAvaliacao } from '@/utils/addAvaliacao.js'
 import { toast } from 'vue-sonner'
-
+import avaliacoes from '@/stores/avaliacoes'
+const avaliacoesOrdenadas = ref(avaliacoes)
 // ResizeObserver p/ medir altura do form e dar mesmo tamanho pra lista
 const formCardRef = ref(null)
 const formHeight = ref(null)
