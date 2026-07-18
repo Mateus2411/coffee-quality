@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import FooterInfo from '@/components/FooterInfo.vue'
 import RatingForm from '@/components/RatingForm.vue'
 import LeaderboardTable from '@/components/LeaderboardTable.vue'
-import { avaliacoes } from '@/stores/avaliacoes.js'
+import { avaliacoes as rawAvaliacoes } from '@/stores/avaliacoes.js'
 import { coffees } from '@/stores/coffees.js'
 import { addAvaliacao } from '@/utils/addAvaliacao.js'
 import { rankingCoffees } from '@/utils/rankingCoffees'
@@ -11,10 +11,23 @@ import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
 
 const router = useRouter()
-const cafesLista = rankingCoffees()
+
+// Trigger counter to force re-render after new evaluation
+const updateTrigger = ref(0)
+
+const cafesLista = computed(() => {
+  updateTrigger.value // dependência para re-calcular
+  return rankingCoffees()
+})
+
+const avaliacoesOrdenadas = computed(() => {
+  updateTrigger.value
+  return [...rawAvaliacoes].sort((a, b) => new Date(b.data) - new Date(a.data))
+})
 
 function handleSalvar({ cafeId, notas, pontuacaoTotal, comentario }) {
   addAvaliacao(cafeId, notas, comentario)
+  updateTrigger.value++
 
   toast.success('Avaliação salva com sucesso!', {
     description: `Nota total: ${pontuacaoTotal.toFixed(1)} pts`,
@@ -35,9 +48,6 @@ function getClassificacaoCor(cls) {
   if (cls === 'Bom') return 'bg-blue-100 text-blue-800'
   return 'bg-stone-100 text-stone-600'
 }
-
-// Ordena avaliações da mais recente pra mais antiga
-const avaliacoesOrdenadas = [...avaliacoes].sort((a, b) => new Date(b.data) - new Date(a.data))
 </script>
 
 <template>
