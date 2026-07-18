@@ -1,6 +1,7 @@
 <script setup>
 import { coffees } from '../stores/coffees.js'
 import { avaliacoes } from '../stores/avaliacoes.js'
+import FooterInfo from '@/components/FooterInfo.vue'
 
 const totalCafesAvaliados = new Set(avaliacoes.map((a) => a.cafeId)).size
 
@@ -115,21 +116,14 @@ const ultima = {
           <span>Ver Avaliações</span>
         </router-link>
       </div>
-      <!-- Footer deve ser movido para o final da página  e componentizado-->
-      <div
-        class="mt-8 bg-white border border-[#E8DDD2] rounded-2xl shadow-sm p-8 flex flex-col lg:flex-row justify-between items-center gap-6"
-      >
-        <div>
-          <h2 class="text-3xl font-semibold">Participe e faça a diferença!</h2>
 
-          <p class="text-gray-600 mt-2 text-lg">
-            Cada avaliação ajuda a reconhecer o trabalho dos produtores e a valorizar o café de
-            qualidade.
-          </p>
-        </div>
-
-        <img src="/farm.png" class="w-80" alt="Fazenda" />
-      </div>
+      <!-- Footer info -->
+      <FooterInfo title="Participe e faça a diferença!">
+        <p class="text-sm text-stone-500 my-0.5 leading-relaxed">
+          Cada avaliação ajuda a reconhecer o trabalho dos produtores e a valorizar o café de
+          qualidade.
+        </p>
+      </FooterInfo>
     </div>
   </section>
 </template>
