@@ -60,10 +60,10 @@ const links = [
           v-for="link in links"
           :key="link.to"
           :to="link.to"
-          class="flex items-center gap-2 text-sm font-medium transition-colors no-underline"
+          class="nav-link flex items-center gap-2 text-sm font-medium transition-colors no-underline"
           :class="
             route.path === link.to
-              ? 'text-stone-900 font-bold pb-1 border-b-2 border-amber-600'
+              ? 'text-amber-700 font-bold active'
               : 'text-stone-500 hover:text-stone-800'
           "
         >
@@ -141,3 +141,25 @@ const links = [
     </div>
   </header>
 </template>
+
+<style scoped>
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #8b5a2b;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+</style>
