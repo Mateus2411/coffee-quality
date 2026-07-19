@@ -27,6 +27,23 @@ Sistema web para **avaliação sensorial de cafés especiais**, seguindo a metod
 
 ---
 
+## 🖼️ Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td width="50%"><img src="./public/screenshots/dashboard.png" alt="Dashboard" width="100%"/><br><em>🏠 Dashboard — Visão geral do campeonato</em></td>
+      <td width="50%"><img src="./public/screenshots/avaliacoes.png" alt="Avaliações" width="100%"/><br><em>📝 Avaliações — Lista de cafés avaliados</em></td>
+    </tr>
+    <tr>
+      <td width="50%"><img src="./public/screenshots/catalogo.png" alt="Catálogo" width="100%"/><br><em>🔍 Catálogo — Busca e filtros</em></td>
+      <td width="50%"><img src="./public/screenshots/ranking.png" alt="Ranking" width="100%"/><br><em>🏆 Ranking — Classificação com Top 3</em></td>
+    </tr>
+  </table>
+</div>
+
+---
+
 ## 🧭 Rotas da Aplicação
 
 | Rota | Página | Descrição |
@@ -59,7 +76,8 @@ Sistema web para **avaliação sensorial de cafés especiais**, seguindo a metod
 ```
 coffee-quality/
 ├── public/
-│   └── coffee_icon.png        # Ícone da aplicação
+│   ├── coffee_icon.png        # Ícone da aplicação
+│   └── screenshots/           # Screenshots do README
 ├── src/
 │   ├── components/            # Componentes reutilizáveis
 │   │   ├── CoffeeCard.vue     # Card individual de café
